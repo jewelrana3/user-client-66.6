@@ -18,7 +18,7 @@ const handleUser=event=>{
   const email = form.email.value;
   const user = {name,email}
   console.log(user)
-
+  
   fetch('http://localhost:5000/users',{
     method:'POST',
     headers:{
@@ -28,12 +28,12 @@ const handleUser=event=>{
   })
   .then(res=>res.json())
   .then(data=>{
-    console.log('client side',data)
+    console.log(data)
 
-   const newUser = [...users,data]
+   const newUser = [...user,data]
    setUser(newUser)
-
-    form.reset()
+   form.reset();
+  
   })
 }
   return (
@@ -45,6 +45,11 @@ const handleUser=event=>{
         <input type="email" name="email" id="e" /><br />
         <input type="submit" value="Add User" />
       </form>
+      <div>
+        {
+          user.map(user=><p key={user.id}>{user.id}:{user.name} {user.email}</p>)
+        }
+      </div>
     </>
   )
 }
